@@ -6,7 +6,7 @@
 /*   By: nalfonso <nalfonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 20:30:32 by nalfonso          #+#    #+#             */
-/*   Updated: 2025/05/12 22:05:54 by nalfonso         ###   ########.fr       */
+/*   Updated: 2025/05/12 22:21:04 by nalfonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int ft_putbases(number nbr,int len, char *base)
 		count += ft_putbases(nbr % len, len ,base);
 	}
 	else
-		count += ft_putcharpf((char *)nbr + *base);
+		count += ft_putcharpf(base[nbr]);
 	return (count);
 }
 static int ft_baseten(long nbr)
@@ -55,10 +55,10 @@ static int ft_baseten(long nbr)
 	return (count);
 }
 
-int ft_format(va_list args, char *format, size_t *count)
+int ft_format(va_list args, char *format)
 {
 	if (*format == 'c')
-		return (ft_putcharpf(va_arg(args, char)));
+		return (ft_putcharpf(va_arg(args, int)));
 	else if (*format == 's')
 		return (ft_putstrpf(va_arg(args, char *)));
 	else if (*format == 'p')
@@ -69,7 +69,7 @@ int ft_format(va_list args, char *format, size_t *count)
 			ft_putcharpf(*format++);
 		}
 		ft_putstrpf("0x");
-		return (ft_putbases(va_arg(args,void *) , 16, HEXADECIMAL));
+		return (2 + ft_putbases((unsigned long)va_arg(args,void *) , 16, HEXADECIMAL));
 	}
 	else if (*format == 'd')
 		return (ft_baseten(va_arg(args, int)));
@@ -98,10 +98,10 @@ int ft_printf(const char *format, ...)
 		if(*format == '%')
 		{
 			format++;
-			count += ft_format(args, (char *)format, &count);
+			count += ft_format(args, (char *)format);
 		}
 		else
-			count += ft_putchar_pf(format, count);
+			count += ft_putcharpf(*format);
 		format++;
 	}
 	va_end(args);
@@ -110,6 +110,6 @@ int ft_printf(const char *format, ...)
 
 int main()
 {
-	ft_printf("Hello baby");
+	ft_printf("Hello baby\n");
 	return (0);
 }
