@@ -49,3 +49,16 @@ int ft_putnbrpf(int nb, int count)
 		count += ft_putcharpf(nbr + 48);
 	return (count);
 }
+
+unsigned int ft_putunbrpf(unsigned nb, unsigned int counter)
+{
+	if (nb >= 10)
+	{
+		count +=  ft_putunbrpf(nb / 10, count);
+		count +=  ft_putunbrpf(nb % 10, count);
+	}
+	else
+		count += ft_putcharpf(nbr + 48);
+	return (count);
+}
+		
