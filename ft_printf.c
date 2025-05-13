@@ -90,7 +90,7 @@ int ft_printf(const char *format, ...)
 {
 	va_list	args;
 	size_t	count;
-
+//Review my printf function that i wrote in mt notebook that is the reasen that when i print NULL its give me a core dump 
 	count = 0;
 	va_start (args, format);
 	while (*format)
