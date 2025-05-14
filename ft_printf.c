@@ -33,10 +33,7 @@ static int ft_putbases(number nbr,int len, char *base)
 
 	count = 0;
 	if (nbr >= (unsigned long)len)
-	{
 		count += ft_putbases(nbr / len, len ,base);
-		count += ft_putbases(nbr % len, len ,base);
-	}
 	else
 		count += ft_putcharpf(base[nbr]);
 	return (count);
