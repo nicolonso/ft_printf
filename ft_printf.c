@@ -84,7 +84,7 @@ static int	ft_format(va_list args, char *format)
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	size_t	count;
+	int	count;
 
 	count = 0;
 	if (!format)
